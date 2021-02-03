@@ -7,8 +7,8 @@ Spotify 한국 음악 플랫폼 테마
 ---------------
 |Schema|Description
 |------|---|
-|melon|melon테마 입니다
-|flo|추가예정
+|melon|melon테마 입니다.
+|flo|flo테마 입니다.
 |genie|추가예정
 
 1.2. 적용방법 ( 예
@@ -24,5 +24,8 @@ spicetify apply
 ---
 > melon 테마
 ![initial](https://media.discordapp.net/attachments/710270749847322716/806337221723947018/unknown.png?width=924&height=489)
+
+>flo 테마
+![initial](https://media.discordapp.net/attachments/710270749847322716/806396243043418152/unknown.png?width=948&height=490)
 
 

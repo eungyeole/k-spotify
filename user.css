@@ -156,7 +156,9 @@ body {
     min-width: 250px;
     border-radius: 0;
     border-bottom: 0;
-    border: 2px solid #23cd3c !important;
+    border: 2px solid var(--modspotify_searchborderras) !important;
+    border: 1px solid var(--modspotify_searchborder) !important;
+    
 }
 
 /* Remove gradient background */
@@ -1009,6 +1011,7 @@ select {
 
 .slider.enabled div {
     background: var(--modspotify_main_fg);
+    background: var(--modspotify_flo_main_color);
 }
 .card-type-user .user-placeholder {
     fill: var(--modspotify_main_fg);
@@ -1019,7 +1022,12 @@ select {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     border-radius: 11px;
 }
-
+.view-player .player-controls-container .controls .button-shuffle{
+    color : var(--modspotify_flo_player_font_color)
+}
+.view-player .player-controls-container .controls .button-repeat{
+    color : var(--modspotify_flo_player_font_color)
+}
 /* Friend list */
 
 .buddy-list-title h3 {
@@ -1058,7 +1066,15 @@ select {
 }
 
 /*Force player bar to has fixed height*/
-
+.view-player .player-controls-container .controls .button-play.button-play:before{
+    color: var(--modspotify_flo_play_color);
+}
+.view-player .player-controls-container .controls .next:before, .view-player .player-controls-container .controls .previous:before{
+    color: var(--modspotify_flo_play_color);
+}
+.view-player .player-controls-container .controls .next:before, .view-player .player-controls-container .controls .previous:before{
+    color: var(--modspotify_flo_play_color);
+}
 .view-player {
     height: var(--bar-height) !important;
     border-top: 0;
@@ -1071,6 +1087,7 @@ select {
     z-index: 2;
     /* Glowing effect */
     background: radial-gradient(ellipse at right 50% bottom -80px, rgba(var(--modspotify_rgb_main_bg), 0.85), var(--modspotify_main_bg) 70%);
+    background: var(--modspotify_flo_player_color);
 }
 
 body.video-full-screen .view-player {
@@ -1119,9 +1136,12 @@ body.video-full-screen .view-player .player-controls-container .progress-contain
     width: 100%;
     left: 0;
 }
-
+button#player-button-play {
+    color: var(--modspotify_flo_play_color)
+}
 .progress-container .inner {
     background-color: var(--modspotify_main_fg) !important;
+    background-color: var(--modspotify_flo_main_color) !important; 
 }
 
 #player-text-elapsed,
@@ -1161,12 +1181,31 @@ body.video-full-screen .view-player .player-controls-container .progress-contain
 
 .view-player .track a {
     color: var(--modspotify_secondary_fg);
+    color: var(--modspotify_flo_play_color);
     font-weight: 500;
 }
-
+.view-player .extra-controls-container .button-queue{
+    color: var(--modspotify_flo_player_font_color);
+}
+.view-player .extra-controls-container .button-devices{
+    color: var(--modspotify_flo_player_font_color);
+}
+.button.button-icon-only{
+    color: var(--modspotify_flo_player_font_color);
+}
+.view-player .extra-controls-container .button-queue:not(:disabled):hover{
+    color: var(--modspotify_flo_palyer_hover_color);
+}
+.view-player .extra-controls-container .button-devices:not(:disabled):hover{
+    color: var(--modspotify_flo_palyer_hover_color);
+}
+.button.button-icon-only:not(:disabled):hover{
+    color: var(--modspotify_flo_palyer_hover_color);
+}
 .view-player .text-container .text-item-container-track {
     height: 20px;
 }
+
 
 .view-player .now-playing-container .caption .text-container,
 .view-player .now-playing .cover-image-link-wrapper {
@@ -1329,14 +1368,34 @@ button#player-button-repeat,
 .view-player .player-bar-wrapper {
     padding-top: 2px;
 }
-
+.view-player .artist a{
+    color: var(--modspotify_flo_player_font_color);
+}
+.view-player .artist a.contextmenu-active, .view-player .artist a:hover{
+    color: var(--modspotify_flo_player_font_color);
+}
 .view-player .player-controls-container .button-repeat.active:after,
 .view-player .player-controls-container .button-shuffle.active:after {
     display: none;
 }
 
+.view-player .player-controls-container .controls .button-shuffle:not(:disabled):hover{
+    color: var(--modspotify_flo_palyer_hover_color);
+}
+.view-player .player-controls-container .controls .button-repeat:not(:disabled):hover{
+    color: var(--modspotify_flo_palyer_hover_color);
+    
+}
+.progress-bar-wrapper.active .handle{
+    background-color: var(--modspotify_flo_main_color);
+}
+.progress-bar .handle{
+    background-color: var(--modspotify_flo_main_color);
+    border: 3px solid var(--modspotify_flo_main_color)
+}
 .view-player .extra-controls-container .volumebar-container .progress-bar .inner {
     background-color: var(--modspotify_main_fg);
+    background-color: var(--modspotify_flo_main_color);
 }
 
 #now-playing-image-large {
