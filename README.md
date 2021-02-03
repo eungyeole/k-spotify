@@ -3,7 +3,7 @@ Spotify 한국 음악 플랫폼 테마
 ### [spicetify-cli](https://github.com/khanhas/spicetify-cli) 기반으로 제작되었습니다.
 ---
 
-1.1. 스키마 종류
+1.1. 테마 종류
 ---------------
 |Schema|Description
 |------|---|
@@ -15,8 +15,8 @@ Spotify 한국 음악 플랫폼 테마
 ------------
 ```shell
 cd k-spotify
-mv ../k-spotify "$(dirname "$(spicetify -c)")/Themes"
-spicetify config current_theme k-spotify
+mv -rf ./melon "$(dirname "$(spicetify -c)")/Themes"
+spicetify config current_theme melon
 spicetify config color_scheme melon
 spicetify apply
 ```
