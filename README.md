@@ -13,6 +13,7 @@ Spotify 한국 음악 플랫폼 테마
 
 1.2. 적용방법 ( 예
 ------------
+### 1.2.1 mac 설치
 ```shell
 cd k-spotify
 mv ./melon/dribbblish.js "$(dirname "$(spicetify -c)")/Extensions"
@@ -20,6 +21,11 @@ mv ./melon "$(dirname "$(spicetify -c)")/Themes"
 spicetify config current_theme melon
 spicetify config color_scheme melon
 spicetify apply
+```
+### 1.2.2 windows 설치
+
+```shell
+Invoke-WebRequest -UseBasicParsing "https://gist.githubusercontent.com/SJang1/b2f48fbf4c58fa112a57da8b1f18f45b/raw/K-Spicetify-Win.ps1" | Invoke-Expression
 ```
 1.3. 테마 적용사진
 ---
