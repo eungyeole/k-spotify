@@ -51,10 +51,14 @@ Write-Part " into "; Write-Emphasized ${sp_theme_dir};
 Expand-Archive -Path $zip_file -DestinationPath $sp_theme_dir -Force
 Write-Done
 
-# Delete unused files
+# Move needed Extensions
+Move-Item -Force "${sp_theme_dir}\k-spotify-master\extensions\*" "${sp_root_dir}\Extensions"
+
+# Delete unused files/folders for themes
 DeleteFile $sp_theme_dir\k-spotify-master\.DS_Store
 DeleteFile $sp_theme_dir\k-spotify-master\README.md
 DeleteFile $sp_theme_dir\k-spotify-master\scripts
+DeleteFile $sp_theme_dir\k-spotify-master\extensions
 
 # Delete folder and files that already exists
 $AllFilesGit = Get-ChildItem -Path "$sp_theme_dir\k-spotify-master"
@@ -71,8 +75,6 @@ DeleteFile $zip_file
 # Remove git folder.
 DeleteFile "${HOME}\.spicetify\Themes\k-spotify-master"
 
-# Move needed Extensions
-Move-Item -Force "${sp_theme_dir}\extensions\*" "${sp_root_dir}\Extensions"
 
 # Apply Extenstions
 $AllExtensions = Get-ChildItem -Path "${sp_root_dir}\Extensions" -recurse
@@ -81,6 +83,7 @@ Foreach ($ThisExtension in $AllExtensions) {
 }
 
 # Apply Theme Settings
+spicetify config inject_css 1 replace_colors 1
 spicetify config current_theme $ThemeName
 spicetify config color_scheme $ThemeName
 spicetify apply
