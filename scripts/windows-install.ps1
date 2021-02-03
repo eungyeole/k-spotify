@@ -1,5 +1,13 @@
 # Select Theme to use
-[ValidateSet("melon","flo","vibe")] $ThemeName = Read-Host -Prompt 'Input Theme name to use! melon | flo | vibe '
+[ValidateSet("RESET","melon","flo","vibe")] $ThemeName = Read-Host -Prompt 'Input Theme name to use! RESET | melon | flo | vibe '
+
+# Reset Theme
+if($ThemeName -eq "RESET"){
+   spicetify config inject_css 0 replace_colors 0
+   spicetify apply
+   Write-Done "Resetted theme"
+   Exit
+}
 
 # Get spicetify-cli
 Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/khanhas/spicetify-cli/master/install.ps1" | Invoke-Expression
