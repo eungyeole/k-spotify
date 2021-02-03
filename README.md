@@ -9,7 +9,7 @@ Spotify 한국 음악 플랫폼 테마
 |------|---|
 |melon|melon테마 입니다.
 |flo|flo테마 입니다.
-|genie|추가예정
+|vibe|Beta
 
 1.2. 적용방법 ( 예
 ------------
