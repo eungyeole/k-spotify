@@ -15,6 +15,7 @@ Spotify 한국 음악 플랫폼 테마
 ------------
 ```shell
 cd k-spotify
+mv -rf ./melon/dribbblish.js "$(dirname "$(spicetify -c)")/Extensions"
 mv -rf ./melon "$(dirname "$(spicetify -c)")/Themes"
 spicetify config current_theme melon
 spicetify config color_scheme melon
