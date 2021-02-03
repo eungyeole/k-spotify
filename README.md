@@ -16,7 +16,7 @@ Spotify 한국 음악 플랫폼 테마
 ### 1.2.1 mac 설치
 ```shell
 cd k-spotify
-mv ./melon/dribbblish.js "$(dirname "$(spicetify -c)")/Extensions"
+mv ./extensions/dribbblish.js "$(dirname "$(spicetify -c)")/Extensions"
 mv ./melon "$(dirname "$(spicetify -c)")/Themes"
 spicetify config current_theme melon
 spicetify config color_scheme melon
