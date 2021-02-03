@@ -1,7 +1,3 @@
-# Set PATH
-$sp_dir = "${HOME}\.spicetify\Themes"
-$sp_root_dir = "${HOME}\.spicetify"
-
 # Select Theme to use
 [ValidateSet("melon","flo","vibe")] $ThemeName = Read-Host -Prompt 'Input Theme name to use! melon | flo '
 
@@ -9,6 +5,10 @@ $sp_root_dir = "${HOME}\.spicetify"
 Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/khanhas/spicetify-cli/master/install.ps1" | Invoke-Expression
 spicetify
 spicetify backup apply enable-devtool
+
+# Set PATH
+$sp_dir = "${HOME}\.spicetify\Themes"
+$sp_root_dir = "${HOME}\.spicetify"
 
 # Create Theme directory if it doesn't already exist
 if (-not (Test-Path $sp_dir)) {
