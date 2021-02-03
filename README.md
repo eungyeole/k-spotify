@@ -20,5 +20,9 @@ spicetify config current_theme k-spotify
 spicetify config color_scheme melon
 spicetify apply
 ```
+1.3. 테마 적용사진
+---
+> melon 테마
+![initial](https://media.discordapp.net/attachments/710270749847322716/806337221723947018/unknown.png?width=924&height=489)
 
 
