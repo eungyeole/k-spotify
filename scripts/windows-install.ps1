@@ -3,7 +3,7 @@ $sp_dir = "${HOME}\.spicetify\Themes"
 $sp_root_dir = "${HOME}\.spicetify"
 
 # Select Theme to use
-[ValidateSet("melon","flo")] $ThemeName = Read-Host -Prompt 'Input Theme name to use! melon | flo '
+[ValidateSet("melon","flo","vibe")] $ThemeName = Read-Host -Prompt 'Input Theme name to use! melon | flo '
 
 # Get spicetify-cli
 Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/khanhas/spicetify-cli/master/install.ps1" | Invoke-Expression
@@ -28,6 +28,11 @@ if (Test-Path $sp_dir\flo) {
   Remove-Item $sp_dir\flo -recurse 
   Write-Done
 }
+if (Test-Path $sp_dir\vibe) {
+    Write-Part "REMOVING       "; Write-Emphasized $sp_dir\vibe
+    Remove-Item $sp_dir\vibe -recurse 
+    Write-Done
+  }  
 
 # Delete K-spotify theme folder if already exists
 $th_old_dir = "${HOME}\.spicetify\Themes\k-spotify"
