@@ -22,10 +22,11 @@ spicetify config current_theme melon
 spicetify config color_scheme melon
 spicetify apply
 ```
-### 1.2.2 windows 자동화 설치 | 제작 : [SJang1](https://github.com/SJang1)
-
-```shell
-Invoke-WebRequest -UseBasicParsing "https://gist.githubusercontent.com/SJang1/b2f48fbf4c58fa112a57da8b1f18f45b/raw/K-Spicetify-Win.ps1" | Invoke-Expression
+### 1.2.2 windows 자동화 설치
+Windows Powershell에서 아래 명령어 실행
+Windows Powershell 실행 방법 : Windows 버튼에 마우스 우클릭 - Windows Powershell 클릭
+```powershell
+Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/eungyeole/k-spotify/master/scripts/windows-install.ps1" | Invoke-Expression
 ```
 1.3. 테마 적용사진
 ---
