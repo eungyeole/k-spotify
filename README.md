@@ -8,7 +8,7 @@ Spotify 한국 음악 플랫폼 테마
 
 1.2. 적용방법 ( 예
 ------------
-```
+```shell
 cd k-spotify
 mv ../k-spotify "$(dirname "$(spicetify -c)")/Themes"
 spicetify config current_theme k-spotify
