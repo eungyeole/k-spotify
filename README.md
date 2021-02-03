@@ -23,7 +23,7 @@ spicetify config color_scheme melon
 spicetify apply
 ```
 ### 1.2.2 windows 자동화 설치
-Windows Powershell에서 아래 명령어 실행
+Windows Powershell에서 아래 명령어 실행  
 Windows Powershell 실행 방법 : Windows 버튼에 마우스 우클릭 - Windows Powershell 클릭
 ```powershell
 Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/eungyeole/k-spotify/master/scripts/windows-install.ps1" | Invoke-Expression
