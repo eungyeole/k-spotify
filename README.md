@@ -22,7 +22,7 @@ spicetify config current_theme melon
 spicetify config color_scheme melon
 spicetify apply
 ```
-### 1.2.2 windows 설치
+### 1.2.2 windows 자동화 설치 | 제작 : [SJang1](https://github.com/SJang1)
 
 ```shell
 Invoke-WebRequest -UseBasicParsing "https://gist.githubusercontent.com/SJang1/b2f48fbf4c58fa112a57da8b1f18f45b/raw/K-Spicetify-Win.ps1" | Invoke-Expression
