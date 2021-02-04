@@ -8,10 +8,12 @@ echo ''
 Start-Sleep -Seconds 1
 
 # Select Theme to use
-[ValidateSet("RESET","melon","flo","vibe")] $ThemeName = Read-Host -Prompt 'Input Theme name to use! RESET | melon | flo | vibe '
+[ValidateSet("default","RESET","melon","flo","vibe")] $ThemeName = Read-Host -Prompt 'Input Theme name to use! default | RESET | melon | flo | vibe '
+[ValidateSet("y","n")] $lyrics = Read-Host -Prompt 'Do you want to install genius/musixmatch lyrics plugin? y | n '
 
 # Set PATH
 $sp_theme_dir = "${HOME}\.spicetify\Themes"
+$sp_customapps_dir = "${HOME}\.spicetify\CustomApps"
 $sp_root_dir = "${HOME}\.spicetify"
 $sp_appdatapath = [Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\Spotify"
 $sp_prefpath = $sp_appdatapath + "\prefs"
@@ -21,6 +23,13 @@ if (-not (Test-Path $sp_appdatapath)) {
   Write-Host $sp_appdatapath
   [System.Windows.MessageBox]::Show('Install Spotify from https://www.spotify.com/download and run this again.')
   Exit
+}
+
+# Create CustomApps directory if it doesn't already exist
+if (-not (Test-Path $sp_theme_dir)) {
+  Write-Part "MAKING FOLDER  "; Write-Emphasized $sp_theme_dir
+  New-Item -Path $sp_theme_dir -ItemType Directory | Out-Null
+  Write-Done
 }
 
 # Alert user if spotify pref is not generated
@@ -36,6 +45,15 @@ Function DeleteFile ([string] $FileDIR) {
       Write-Part "REMOVING       "; Write-Emphasized $FileDIR
       Remove-Item $FileDIR -recurse 
       Write-Done
+  }
+}
+
+# Apply Extenstions Function
+Function ApplyAllExtension {
+  $AllExtensions = Get-ChildItem -Path "${sp_root_dir}\Extensions"
+  Foreach ($ThisExtension in $AllExtensions) {
+    spicetify config extensions $ThisExtension
+    spicetify apply
   }
 }
 
@@ -72,6 +90,9 @@ if($ThemeName -eq "RESET"){
 # Delete Extenstions
 if (Test-Path "${sp_root_dir}\Extensions") {
     spicetify restore
+    DeleteFile "${sp_root_dir}\Extensions"
+    DeleteFile "${sp_root_dir}\config.ini"
+    New-Item -Path "${sp_root_dir}\Extensions" -ItemType Directory | Out-Null
 }
 
 # Enable TLS 1.2 since it is required for connections to GitHub.
@@ -89,55 +110,88 @@ if (-not (Test-Path $sp_theme_dir)) {
   Write-Done
 }
 
-# Delete K-spotify theme folder if already exists
-DeleteFile "${HOME}\.spicetify\Themes\k-spotify"
 
-# Download release.
-$zip_file = "${sp_theme_dir}\K-spotify-master.zip"
-$download_uri = "https://github.com/eungyeole/k-spotify/archive/master.zip"
-Write-Part "DOWNLOADING    "; Write-Emphasized $download_uri
-Invoke-WebRequest -Uri $download_uri -UseBasicParsing -OutFile $zip_file
-Write-Done
 
-# Extract assets from .zip file.
-Write-Part "EXTRACTING     "; Write-Emphasized $zip_file
-Write-Part " into "; Write-Emphasized ${sp_theme_dir};
-Expand-Archive -Path $zip_file -DestinationPath $sp_theme_dir -Force
-Write-Done
+# Theme not if default
+if (-not($ThemeName -eq 'default')) {
+  # Delete K-spotify theme folder if already exists
+  DeleteFile "${HOME}\.spicetify\Themes\k-spotify"
 
-# Move needed Extensions
-if (Test-Path "${sp_theme_dir}\k-spotify-master\extensions\${ThemeName}") {
-    Write-Part "MOVING         "; Write-Emphasized "${sp_theme_dir}\k-spotify-master\extensions\${ThemeName}"
-    Write-Part " into "; Write-Emphasized "${sp_root_dir}\Extensions";
-    Move-Item -Force "${sp_theme_dir}\k-spotify-master\extensions\${ThemeName}\*" "${sp_root_dir}\Extensions"
-    Write-Done
+  # Download theme release.
+  $zip_file = "${sp_theme_dir}\K-spotify-master.zip"
+  $download_uri = "https://github.com/eungyeole/k-spotify/archive/master.zip"
+  Write-Part "DOWNLOADING    "; Write-Emphasized $download_uri
+  Invoke-WebRequest -Uri $download_uri -UseBasicParsing -OutFile $zip_file
+  Write-Done
+
+  # Extract assets from .zip file.
+  Write-Part "EXTRACTING     "; Write-Emphasized $zip_file
+  Write-Part " into "; Write-Emphasized ${sp_theme_dir};
+  Expand-Archive -Path $zip_file -DestinationPath $sp_theme_dir -Force
+  Write-Done
+
+  # Move needed Extensions
+  if (Test-Path "${sp_theme_dir}\k-spotify-master\extensions\${ThemeName}") {
+      Write-Part "MOVING         "; Write-Emphasized "${sp_theme_dir}\k-spotify-master\extensions\${ThemeName}"
+      Write-Part " into "; Write-Emphasized "${sp_root_dir}\Extensions";
+      Move-Item -Force "${sp_theme_dir}\k-spotify-master\extensions\${ThemeName}\*" "${sp_root_dir}\Extensions"
+      Write-Done
+  }
+
+  # Delete theme if that already exists which will be installed
+  DeleteFile $sp_theme_dir\$ThemeName
+
+  #Move folder
+  Write-Part "MOVING         "; Write-Emphasized "${HOME}\.spicetify\Themes\k-spotify-master\themes\${ThemeName}"
+  Write-Part " into "; Write-Emphasized "${HOME}\.spicetify\Themes";
+  Move-Item -Force "${HOME}\.spicetify\Themes\k-spotify-master\themes\${ThemeName}" -Destination "${HOME}\.spicetify\Themes"
+  Write-Done
+
+  # Remove .zip file.
+  DeleteFile $zip_file
+
+  # Remove git folder.
+  DeleteFile "${HOME}\.spicetify\Themes\k-spotify-master"
+
+  # Apply theme settings
+  ApplyAllExtension
+  spicetify config inject_css 1 replace_colors 1
+  spicetify config current_theme $ThemeName
+  spicetify config color_scheme $ThemeName
+
+} else {
+  spicetify config inject_css 0 replace_colors 0
 }
 
-# Delete theme if that already exists which will be installed
-DeleteFile $sp_theme_dir\$ThemeName
 
-#Move folder
-Write-Part "MOVING         "; Write-Emphasized "${HOME}\.spicetify\Themes\k-spotify-master\themes\${ThemeName}"
-Write-Part " into "; Write-Emphasized "${HOME}\.spicetify\Themes";
-Move-Item -Force "${HOME}\.spicetify\Themes\k-spotify-master\themes\${ThemeName}" -Destination "${HOME}\.spicetify\Themes"
-Write-Done
 
-# Remove .zip file.
-DeleteFile $zip_file
+# If user want lyrics
+if ($lyrics -eq 'y') {
 
-# Remove git folder.
-DeleteFile "${HOME}\.spicetify\Themes\k-spotify-master"
+  # Get from github
+  $lyrics_github = "https://github.com/khanhas/genius-spicetify/archive/master.zip"
+  Write-Part "DOWNLOADING    "; Write-Emphasized $lyrics_github
+  Invoke-WebRequest -Uri $lyrics_github -UseBasicParsing -OutFile "${sp_customapps_dir}\genius.zip"
+  Write-Done
 
-# Apply Extenstions
-$AllExtensions = Get-ChildItem -Path "${sp_root_dir}\Extensions"
-Foreach ($ThisExtension in $AllExtensions) {
-  spicetify config extensions $ThisExtension
+  # Unzip
+  Write-Part "EXTRACTING     "; Write-Emphasized "${sp_customapps_dir}\genius.zip"
+  Write-Part " into "; Write-Emphasized ${sp_customapps_dir};
+  Expand-Archive -Path "${sp_customapps_dir}\genius.zip" -DestinationPath $sp_customapps_dir -Force
+  Write-Done
+
+  # Change name
+  DeleteFile "${sp_customapps_dir}\genius"
+  Write-Part "MOVING         "; Write-Emphasized "${sp_customapps_dir}\genius-spicetify-master"
+  Write-Part " into "; Write-Emphasized "${sp_customapps_dir}\genius"
+  Rename-Item "${sp_customapps_dir}\genius-spicetify-master" "${sp_customapps_dir}\genius"
+  Write-Done
+
+  # Save Config
+  spicetify config custom_apps genius
 }
 
-# Apply Theme Settings
-spicetify config inject_css 1 replace_colors 1
-spicetify config current_theme $ThemeName
-spicetify config color_scheme $ThemeName
+
+
+# Apply 
 spicetify apply
-
-Write-Done "K-Theme : ${ThemeName} is now applied."
