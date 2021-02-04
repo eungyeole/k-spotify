@@ -179,6 +179,9 @@ if ($lyrics -eq 'y') {
   Write-Part " into "; Write-Emphasized ${sp_customapps_dir};
   Expand-Archive -Path "${sp_customapps_dir}\genius.zip" -DestinationPath $sp_customapps_dir -Force
   Write-Done
+  
+  # Delete zip to free up space
+  DeleteFile "${sp_customapps_dir}\genius.zip"
 
   # Change name
   DeleteFile "${sp_customapps_dir}\genius"
