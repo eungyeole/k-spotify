@@ -90,6 +90,8 @@ if($ThemeName -eq "RESET"){
 # Delete Extenstions
 if (Test-Path "${sp_root_dir}\Extensions") {
     spicetify restore
+    DeleteFile "${sp_root_dir}\Extensions\*"
+    DeleteFile "${sp_root_dir}\config.ini"
 }
 
 # Enable TLS 1.2 since it is required for connections to GitHub.
@@ -150,6 +152,7 @@ if (-not($ThemeName -eq 'default')) {
   DeleteFile "${HOME}\.spicetify\Themes\k-spotify-master"
 
   # Apply theme settings
+  ApplyAllExtension
   spicetify config inject_css 1 replace_colors 1
   spicetify config current_theme $ThemeName
   spicetify config color_scheme $ThemeName
@@ -186,7 +189,6 @@ if ($lyrics -eq 'y') {
 
 
 # Apply 
-
 spicetify apply
 
 Write-Done "K-Theme : ${ThemeName} is now applied."
