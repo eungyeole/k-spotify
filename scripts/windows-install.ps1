@@ -106,8 +106,13 @@ Write-Host "You selected"
 Write-Host "Theme : " + ${ThemeName}
 Write-Host "Install lyrics : " + ${lyrics}
 Write-Host "Install Korean : " + ${WantLangKorean}
-Write-Host "AutoUpdate : >${autoupdate}<       this needs to be >TurnOn< to turn it on, otherwise it will be disabled."
+if ($autoupdate -eq 'TurnOn') {
+  Write-Host "AutoUpdate : On"
+} else {
+  Write-Host "AutoUpdate : Off"
+}
 
+Start-Sleep -Seconds 5
 
 # ======================================= User Input Ends ======================================= #
 # ======================================= Installing spicetify-cli starts here ======================================= #
