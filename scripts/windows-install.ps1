@@ -106,7 +106,7 @@ Write-Host "You selected"
 Write-Host "Theme : " + ${ThemeName}
 Write-Host "Install lyrics : " + ${lyrics}
 Write-Host "Install Korean : " + ${WantLangKorean}
-Write-Host "AutoUpdate : "' + ${autoupdate} + '"       this needs to be 'TurnOn' to turn it on, otherwise it will be disabled."
+Write-Host "AutoUpdate : >${autoupdate}<       this needs to be >TurnOn< to turn it on, otherwise it will be disabled."
 
 
 # ======================================= User Input Ends ======================================= #
