@@ -11,6 +11,14 @@ Start-Sleep -Seconds 1
 # ======================================= Functions and preparing starts here ======================================= #
 
 
+# Set PATH
+$sp_theme_dir = "${HOME}\.spicetify\Themes"
+$sp_customapps_dir = "${HOME}\.spicetify\CustomApps"
+$sp_root_dir = "${HOME}\.spicetify"
+$sp_appdatapath = [Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\Spotify"
+$sp_prefpath = $sp_appdatapath + "\prefs"
+
+
 # Alert user if spotify is not installed from spotify.com
 if (-not (Test-Path $sp_appdatapath)) {
   Write-Host $sp_appdatapath
@@ -24,13 +32,6 @@ if (-not (Test-Path $sp_prefpath)) {
   [System.Windows.MessageBox]::Show('Open Spotify, login, and run this again.')
   Exit
 }
-
-# Set PATH
-$sp_theme_dir = "${HOME}\.spicetify\Themes"
-$sp_customapps_dir = "${HOME}\.spicetify\CustomApps"
-$sp_root_dir = "${HOME}\.spicetify"
-$sp_appdatapath = [Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\Spotify"
-$sp_prefpath = $sp_appdatapath + "\prefs"
 
 # Delete Function
 Function DeleteFile ([string] $FileDIR) {
