@@ -93,6 +93,21 @@ if($ThemeName -eq "RESET"){
 [ValidateSet("y","n")] $lyrics = Read-Host -Prompt 'Do you want to install genius/musixmatch lyrics plugin? y | n '
 [ValidateSet("y","n")] $WantLangKorean = Read-Host -Prompt 'Do you want Spotify to be Korean? y | n '
 
+echo ''
+echo 'Do you want to check for Spotify Updates automatically?'
+echo 'If you turn this on, It might have some problem after Spotify update. = enter TurnOn'
+echo 'If you turn this off, You need to manually check for updates using spotify installer. = enter anything'
+echo 'Spotify Installer Download : https://www.spotify.com/download'
+echo ''
+$autoupdate = Read-Host -Prompt 'Recommended answer is n. Which will you choose? TurnOn | enter anything '
+
+
+echo 'You selected'
+echo 'Theme : ${ThemeName}'
+echo 'Install lyrics : ${lyrics}'
+echo 'Install Korean : ${WantLangKorean}'
+echo 'AutoUpdate : "${autoupdate}"       this needs to be "TurnOn" to turn it on, otherwise it will be disabled.'
+
 
 # ======================================= User Input Ends ======================================= #
 # ======================================= Installing spicetify-cli starts here ======================================= #
@@ -220,6 +235,12 @@ if ($lyrics -eq 'y') {
 # If user want Spotify to be Korean
 if ($WantLangKorean -eq 'y') {
   Add-Content $sp_prefpath "`nlanguage=""ko"""
+}
+
+# If user want Spotify to be updated automatically
+if ($autoupdate -eq 'TurnOn') {
+  spicetify config disable_upgrade_check 0
+  spicetify config check_spicetify_upgrade 1
 }
 
 
