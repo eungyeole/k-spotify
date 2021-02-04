@@ -90,8 +90,9 @@ if($ThemeName -eq "RESET"){
 # Delete Extenstions
 if (Test-Path "${sp_root_dir}\Extensions") {
     spicetify restore
-    DeleteFile "${sp_root_dir}\Extensions\*"
+    DeleteFile "${sp_root_dir}\Extensions"
     DeleteFile "${sp_root_dir}\config.ini"
+    New-Item -Path "${sp_root_dir}\Extensions" -ItemType Directory | Out-Null
 }
 
 # Enable TLS 1.2 since it is required for connections to GitHub.
@@ -108,6 +109,7 @@ if (-not (Test-Path $sp_theme_dir)) {
   New-Item -Path $sp_theme_dir -ItemType Directory | Out-Null
   Write-Done
 }
+
 
 
 # Theme not if default
@@ -161,6 +163,8 @@ if (-not($ThemeName -eq 'default')) {
   spicetify config inject_css 0 replace_colors 0
 }
 
+
+
 # If user want lyrics
 if ($lyrics -eq 'y') {
 
@@ -176,6 +180,7 @@ if ($lyrics -eq 'y') {
   Expand-Archive -Path "${sp_customapps_dir}\genius.zip" -DestinationPath $sp_customapps_dir -Force
   Write-Done
 
+  # Change name
   DeleteFile "${sp_customapps_dir}\genius"
   Write-Part "MOVING         "; Write-Emphasized "${sp_customapps_dir}\genius-spicetify-master"
   Write-Part " into "; Write-Emphasized "${sp_customapps_dir}\genius"
@@ -188,8 +193,5 @@ if ($lyrics -eq 'y') {
 
 
 
-
 # Apply 
 spicetify apply
-
-Write-Done "K-Theme : ${ThemeName} is now applied."
