@@ -1,10 +1,10 @@
 # Info users
-Write-Host 'By using this script, you agree that we can delete/reset/modify theese things that is installed under ~/.spicetify'
-Write-Host 'Installed extensions, theme folder, spicetify config file, spicetify installed folder, spicetify folder, and other spicetify related things, spotify configuration'
-Write-Host 'If you want to disagree, just simply close this script'
-Write-Host ''
-Write-Host 'You can download newer version of this script (if you need it) at https://github.com/eungyeole/k-spotify'
-Write-Host ''
+Write-Host "By using this script, you agree that we can delete/reset/modify theese things that is installed under ~/.spicetify"
+Write-Host "Installed extensions, theme folder, spicetify config file, spicetify installed folder, spicetify folder, and other spicetify related things, spotify configuration"
+Write-Host "If you want to disagree, just simply close this script"
+Write-Host ""
+Write-Host "You can download newer version of this script (if you need it) at https://github.com/eungyeole/k-spotify"
+Write-Host ""
 Start-Sleep -Seconds 1
 
 
@@ -56,15 +56,15 @@ Function ApplyAllExtension {
 
 
 # Select Theme to use
-Write-Host 'You can reset plugins by writting RESET'
+Write-Host "You can reset plugins by writting RESET"
 [ValidateSet("default","RESET","melon","flo","vibe")] $ThemeName = Read-Host -Prompt 'Input Theme name to use! default | melon | flo | vibe '
 
 # Reset Theme
 if($ThemeName -eq "RESET"){
-  Write-Host '1. Disable CSS (Leave Extension)'
-  Write-Host '2. Restore config'
-  Write-Host '3. Reset spicetify config file - Recommended'
-  Write-Host '4. Remove spicetify'
+  Write-Host "1. Disable CSS (Leave Extension)"
+  Write-Host "2. Restore config"
+  Write-Host "3. Reset spicetify config file - Recommended"
+  Write-Host "4. Remove spicetify"
   [ValidateSet('1','2','3','4')] $ResetHow = Read-Host -Prompt 'How would you like to reset? 1 | 2 | 3 | 4 Enter Number '
   if($ResetHow -eq '1'){
     spicetify config inject_css 0 replace_colors 0
@@ -83,7 +83,7 @@ if($ThemeName -eq "RESET"){
     DeleteFile $sp_root_dir
     Write-Done "Deleted"
   } else {
-    Write-Host 'wrong input provided'
+    Write-Host "wrong input provided"
     pause
   }
   Exit
@@ -93,20 +93,20 @@ if($ThemeName -eq "RESET"){
 [ValidateSet("y","n")] $lyrics = Read-Host -Prompt 'Do you want to install genius/musixmatch lyrics plugin? y | n '
 [ValidateSet("y","n")] $WantLangKorean = Read-Host -Prompt 'Do you want Spotify to be Korean? y | n '
 
-Write-Host ''
-Write-Host 'Do you want to check for Spotify Updates automatically?'
-Write-Host 'If you turn this on, It might have some problem after Spotify update. = enter TurnOn'
-Write-Host 'If you turn this off, You need to manually check for updates using spotify installer. = enter anything'
-Write-Host 'Spotify Installer Download : https://www.spotify.com/download'
-Write-Host ''
-$autoupdate = Read-Host -Prompt 'Recommended answer is n. Which will you choose? TurnOn | enter anything '
+Write-Host ""
+Write-Host "Do you want to check for Spotify Updates automatically?"
+Write-Host "If you turn this on, It might have some problem after Spotify update. = enter TurnOn"
+Write-Host "If you turn this off, You need to manually check for updates using spotify installer. = enter anything"
+Write-Host "Spotify Installer Download : https://www.spotify.com/download"
+Write-Host ""
+$autoupdate = Read-Host -Prompt "Recommended answer is n. Which will you choose? TurnOn | enter anything "
 
 
-Write-Host 'You selected'
-Write-Host 'Theme : ' + ${ThemeName}
-Write-Host 'Install lyrics : ' + ${lyrics}
-Write-Host 'Install Korean : ' + ${WantLangKorean}'
-Write-Host 'AutoUpdate : "' + ${autoupdate} + '"       this needs to be "TurnOn" to turn it on, otherwise it will be disabled.'
+Write-Host "You selected"
+Write-Host "Theme : " + ${ThemeName}
+Write-Host "Install lyrics : " + ${lyrics}
+Write-Host "Install Korean : " + ${WantLangKorean}
+Write-Host "AutoUpdate : "' + ${autoupdate} + '"       this needs to be 'TurnOn' to turn it on, otherwise it will be disabled."
 
 
 # ======================================= User Input Ends ======================================= #
