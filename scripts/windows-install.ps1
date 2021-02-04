@@ -7,17 +7,9 @@ echo 'You can download newer version of this script (if you need it) at https://
 echo ''
 Start-Sleep -Seconds 1
 
-# Select Theme to use
-[ValidateSet("default","RESET","melon","flo","vibe")] $ThemeName = Read-Host -Prompt 'Input Theme name to use! default | RESET | melon | flo | vibe '
-[ValidateSet("y","n")] $lyrics = Read-Host -Prompt 'Do you want to install genius/musixmatch lyrics plugin? y | n '
-[ValidateSet("y","n")] $WantLangKorean = Read-Host -Prompt 'Do you want Spotify to be Korean? y | n '
 
-# Set PATH
-$sp_theme_dir = "${HOME}\.spicetify\Themes"
-$sp_customapps_dir = "${HOME}\.spicetify\CustomApps"
-$sp_root_dir = "${HOME}\.spicetify"
-$sp_appdatapath = [Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\Spotify"
-$sp_prefpath = $sp_appdatapath + "\prefs"
+# ======================================= Functions and preparing starts here ======================================= #
+
 
 # Alert user if spotify is not installed from spotify.com
 if (-not (Test-Path $sp_appdatapath)) {
@@ -26,19 +18,19 @@ if (-not (Test-Path $sp_appdatapath)) {
   Exit
 }
 
-# Create CustomApps directory if it doesn't already exist
-if (-not (Test-Path $sp_theme_dir)) {
-  Write-Part "MAKING FOLDER  "; Write-Emphasized $sp_theme_dir
-  New-Item -Path $sp_theme_dir -ItemType Directory | Out-Null
-  Write-Done
-}
-
 # Alert user if spotify pref is not generated
 if (-not (Test-Path $sp_prefpath)) {
   Write-Host $sp_prefpath
   [System.Windows.MessageBox]::Show('Open Spotify, login, and run this again.')
   Exit
 }
+
+# Set PATH
+$sp_theme_dir = "${HOME}\.spicetify\Themes"
+$sp_customapps_dir = "${HOME}\.spicetify\CustomApps"
+$sp_root_dir = "${HOME}\.spicetify"
+$sp_appdatapath = [Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData) + "\Spotify"
+$sp_prefpath = $sp_appdatapath + "\prefs"
 
 # Delete Function
 Function DeleteFile ([string] $FileDIR) {
@@ -57,6 +49,14 @@ Function ApplyAllExtension {
     spicetify apply
   }
 }
+
+
+# ======================================= User Input starts here / Reset Function ======================================= #
+
+
+# Select Theme to use
+echo 'You can reset plugins by writting RESET'
+[ValidateSet("default","RESET","melon","flo","vibe")] $ThemeName = Read-Host -Prompt 'Input Theme name to use! default | melon | flo | vibe '
 
 # Reset Theme
 if($ThemeName -eq "RESET"){
@@ -88,6 +88,15 @@ if($ThemeName -eq "RESET"){
   Exit
 }
 
+# Select Plugins to use
+[ValidateSet("y","n")] $lyrics = Read-Host -Prompt 'Do you want to install genius/musixmatch lyrics plugin? y | n '
+[ValidateSet("y","n")] $WantLangKorean = Read-Host -Prompt 'Do you want Spotify to be Korean? y | n '
+
+
+# ======================================= User Input Ends ======================================= #
+# ======================================= Installing spicetify-cli starts here ======================================= #
+
+
 # Delete Extenstions
 if (Test-Path "${sp_root_dir}\Extensions") {
     spicetify restore
@@ -111,9 +120,19 @@ if (-not (Test-Path $sp_theme_dir)) {
   Write-Done
 }
 
+# Create CustomApps directory if it doesn't already exist
+if (-not (Test-Path $sp_theme_dir)) {
+  Write-Part "MAKING FOLDER  "; Write-Emphasized $sp_theme_dir
+  New-Item -Path $sp_theme_dir -ItemType Directory | Out-Null
+  Write-Done
+}
 
 
-# Theme not if default
+# ======================================= Installing spicetify-cli ends here ======================================= #
+# ======================================= Start installing extensions and themes ======================================= #
+
+
+# Theme if not default
 if (-not($ThemeName -eq 'default')) {
   # Delete K-spotify theme folder if already exists
   DeleteFile "${HOME}\.spicetify\Themes\k-spotify"
