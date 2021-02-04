@@ -103,10 +103,10 @@ $autoupdate = Read-Host -Prompt 'Recommended answer is n. Which will you choose?
 
 
 echo 'You selected'
-echo 'Theme : ${ThemeName}'
-echo 'Install lyrics : ${lyrics}'
-echo 'Install Korean : ${WantLangKorean}'
-echo 'AutoUpdate : "${autoupdate}"       this needs to be "TurnOn" to turn it on, otherwise it will be disabled.'
+echo 'Theme : ' + ${ThemeName}
+echo 'Install lyrics : ' + ${lyrics}
+echo 'Install Korean : ' + ${WantLangKorean}'
+echo 'AutoUpdate : "' + ${autoupdate} + '"       this needs to be "TurnOn" to turn it on, otherwise it will be disabled.'
 
 
 # ======================================= User Input Ends ======================================= #
