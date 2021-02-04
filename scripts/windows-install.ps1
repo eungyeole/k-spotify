@@ -10,6 +10,7 @@ Start-Sleep -Seconds 1
 # Select Theme to use
 [ValidateSet("default","RESET","melon","flo","vibe")] $ThemeName = Read-Host -Prompt 'Input Theme name to use! default | RESET | melon | flo | vibe '
 [ValidateSet("y","n")] $lyrics = Read-Host -Prompt 'Do you want to install genius/musixmatch lyrics plugin? y | n '
+[ValidateSet("y","n")] $WantLangKorean = Read-Host -Prompt 'Do you want Spotify to be Korean? y | n '
 
 # Set PATH
 $sp_theme_dir = "${HOME}\.spicetify\Themes"
@@ -179,6 +180,9 @@ if ($lyrics -eq 'y') {
   Write-Part " into "; Write-Emphasized ${sp_customapps_dir};
   Expand-Archive -Path "${sp_customapps_dir}\genius.zip" -DestinationPath $sp_customapps_dir -Force
   Write-Done
+  
+  # Delete zip to free up space
+  DeleteFile "${sp_customapps_dir}\genius.zip"
 
   # Change name
   DeleteFile "${sp_customapps_dir}\genius"
@@ -189,6 +193,13 @@ if ($lyrics -eq 'y') {
 
   # Save Config
   spicetify config custom_apps genius
+}
+
+
+
+# If user want Spotify to be Korean
+if ($WantLangKorean -eq 'y') {
+  Add-Content $sp_prefpath "`nlanguage=""ko"""
 }
 
 
