@@ -176,6 +176,7 @@ if ($lyrics -eq 'y') {
   Expand-Archive -Path "${sp_customapps_dir}\genius.zip" -DestinationPath $sp_customapps_dir -Force
   Write-Done
 
+  DeleteFile "${sp_customapps_dir}\genius"
   Write-Part "MOVING         "; Write-Emphasized "${sp_customapps_dir}\genius-spicetify-master"
   Write-Part " into "; Write-Emphasized "${sp_customapps_dir}\genius"
   Rename-Item "${sp_customapps_dir}\genius-spicetify-master" "${sp_customapps_dir}\genius"
