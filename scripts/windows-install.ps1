@@ -1,6 +1,6 @@
 # Info users
 echo 'By using this script, you agree that we can delete/reset/modify theese things that is installed under ~/.spicetify'
-echo 'Installed extensions, theme folder that is named same as which you want to install, spicetify config file, spicetify installed folder, spicetify folder, spotify configuration'
+echo 'Installed extensions, theme folder, spicetify config file, spicetify installed folder, spicetify folder, and other spicetify related things, spotify configuration'
 echo 'If you want to disagree, just simply close this script'
 echo ''
 echo 'You can download newer version of this script (if you need it) at https://github.com/eungyeole/k-spotify'
@@ -70,12 +70,8 @@ if($ThemeName -eq "RESET"){
 }
 
 # Delete Extenstions
-if (Test-Path "${sp_root_dir}\Extensions" -PathType Leaf) {
-    $AllExtensions = Get-ChildItem -Path "${sp_root_dir}\Extensions"
-    Foreach ($ThisExtension in $AllExtensions) {
-        DeleteFile $ThisExtension
-    }
-    DeleteFile "${sp_root_dir}\config.ini"
+if (Test-Path "${sp_root_dir}\Extensions") {
+    spicetify restore
 }
 
 # Enable TLS 1.2 since it is required for connections to GitHub.
@@ -121,9 +117,9 @@ if (Test-Path "${sp_theme_dir}\k-spotify-master\extensions\${ThemeName}") {
 DeleteFile $sp_theme_dir\$ThemeName
 
 #Move folder
-Write-Part "MOVING         "; Write-Emphasized "${HOME}\.spicetify\Themes\k-spotify-master\${ThemeName}"
+Write-Part "MOVING         "; Write-Emphasized "${HOME}\.spicetify\Themes\k-spotify-master\themes\${ThemeName}"
 Write-Part " into "; Write-Emphasized "${HOME}\.spicetify\Themes";
-Move-Item -Force "${HOME}\.spicetify\Themes\k-spotify-master\${ThemeName}" -Destination "${HOME}\.spicetify\Themes"
+Move-Item -Force "${HOME}\.spicetify\Themes\k-spotify-master\themes\${ThemeName}" -Destination "${HOME}\.spicetify\Themes"
 Write-Done
 
 # Remove .zip file.
