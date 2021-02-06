@@ -1,5 +1,3 @@
-# Set UTF-8 Encoding
-$env:LC_ALL='C.UTF-8'
 [System.Console]::InputEncoding = [System.Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
 # If this even don't work, I don't have any idea how to fix it
