@@ -1,7 +1,11 @@
-﻿$env:LC_ALL='C.UTF-8'
+# Set UTF-8 Encoding
+$env:LC_ALL='C.UTF-8'
 [System.Console]::InputEncoding = [System.Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
+# If this even don't work, I don't have any idea how to fix it
 
 # Info users
+
 Write-Host "By using this script, you agree that we can delete/reset/modify theese things that is installed under ~/.spicetify"
 Write-Host "Installed extensions, theme folder, spicetify config file, spicetify installed folder, spicetify folder, and other spicetify related things, spotify configuration"
 Write-Host "If you want to disagree, just simply close this script"
