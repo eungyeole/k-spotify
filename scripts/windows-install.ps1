@@ -1,4 +1,4 @@
-# Info users
+﻿# Info users
 
 Function TOS_English() {
   Write-Host "By using this script, you agree that we can Delete/Modify everything that is installed at ~/.spicetify folder, modify spotify configuration, and Powershell Configuration"
@@ -7,32 +7,9 @@ Function TOS_English() {
   Write-Host "You can download newer version of this script (if you need it) at https://github.com/eungyeole/k-spotify"
   Write-Host ""
   Start-Sleep -Seconds 1
-  do { $AgreeTOS = (Read-Host -Prompt 'Do you agree? [Y]es | [N]o | [K]orean ').ToLower() } while ($AgreeTOS -notin @('y','n','k'))
-}
-Function TOS_Korean() {
-  # Set up UTF-8 (needed for Korean)
-  [System.Console]::InputEncoding = [System.Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-  $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
-  Write-Host "이 스크립트를 실행함으로서 ~/.spicetify 폴더 아래의 모든 파일, 스포티파이 설정을 수정 또는 삭제할 수 있음을 이해했습니다."
-  Write-Host "또한, 방금 전 한국어를 표시하기 위해 파워쉘 설정에서 UTF8을 지원하도록 변경하였습니다."
-  Write-Host "미동의시, 이 스크립트를 종료해주세요."
-  Write-Host ""
-  Write-Host "참고로, 새 버전의 스크립트가 필요하신 경우 https://github.com/eungyeole/k-spotify 에서 받을 수 있습니다."
-  Write-Host ""
-  Start-Sleep -Seconds 1
-  do { $AgreeTOS = (Read-Host -Prompt '동의하시겠습니까? [Y]es | [N]o ').ToLower() } while ($AgreeTOS -notin @('y','n'))
-
+  do { $AgreeTOS = (Read-Host -Prompt 'Do you agree? [Y]es | [N]o | [K]orean ').ToLower() } while ($AgreeTOS -notin @('y'))
 }
 
-# Close if not agreed to TOS
-TOS_English
-if($AgreeTOS -eq "y") {
-  Write-Host "You have Agreed to our Term Of Service."
-} elseif($AgreeTOS -eq "k") {
-  TOS_Korean
-} else {
-  Exit
-}
 
 # ======================================= Functions and preparing starts here ======================================= #
 
