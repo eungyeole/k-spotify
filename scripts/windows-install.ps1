@@ -1,4 +1,4 @@
-$env:LC_ALL='C.UTF-8'
+﻿$env:LC_ALL='C.UTF-8'
 [System.Console]::InputEncoding = [System.Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
 # Info users
