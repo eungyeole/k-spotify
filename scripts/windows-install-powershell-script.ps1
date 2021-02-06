@@ -360,7 +360,7 @@ if ( (-not($ThemeName -eq 'default')) -and (-not($isCommunityTheme -eq 'true')) 
 
   # Download theme release.
   $zip_file = "${sp_theme_dir}\spicetify-themes.zip"
-  $download_uri = "https://github.com/morpheusthewhite/spicetify-themes.git"
+  $download_uri = "https://github.com/morpheusthewhite/spicetify-themes/archive/master.zip"
   Write-Part "DOWNLOADING    "; Write-Emphasized $download_uri
   Invoke-WebRequest -Uri $download_uri -UseBasicParsing -OutFile $zip_file
   Write-Done
