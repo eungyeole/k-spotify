@@ -57,7 +57,8 @@ Function ApplyAllExtension {
 
 # Select Theme to use
 Write-Host "You can reset plugins by writting RESET"
-[ValidateSet("default","RESET","melon","flo","vibe")] $ThemeName = Read-Host -Prompt 'Input Theme name to use! default | melon | flo | vibe '
+do { $ThemeName = Read-Host -Prompt 'Input Theme name to use! default | melon | flo | vibe ' } 
+until ("default","RESET","melon","flo","vibe" -ccontains $ThemeName)
 
 # Reset Theme
 if($ThemeName -eq "RESET"){
@@ -90,8 +91,10 @@ if($ThemeName -eq "RESET"){
 }
 
 # Select Plugins to use
-[ValidateSet("y","n")] $lyrics = Read-Host -Prompt 'Do you want to install genius/musixmatch lyrics plugin? y | n '
-[ValidateSet("y","n")] $WantLangKorean = Read-Host -Prompt 'Do you want Spotify to be Korean? y | n '
+do { $lyrics = (Read-Host -Prompt 'Do you want to install lyrics plugin? [Y]es | [N]o ').ToLower() } while ($lyrics -notin @('y','n'))
+do { $autoSkipVideo = (Read-Host -Prompt 'Do you want to auto skip when unavaliable songs? [Y]es | [N]o ').ToLower() } while ($autoSkipVideo -notin @('y','n'))
+do { $loopyLoop = (Read-Host -Prompt 'Do you want to install Custom Loop Time setting? [Y]es | [N]o ').ToLower() } while ($loopyLoop -notin @('y','n'))
+do { $WantLangKorean = (Read-Host -Prompt 'Do you want Spotify to be Korean? [Y]es | [N]o ').ToLower() } while ($WantLangKorean -notin @('y','n'))
 
 Write-Host ""
 Write-Host "Do you want to check for Spotify Updates automatically?"
@@ -101,18 +104,7 @@ Write-Host "Spotify Installer Download : https://www.spotify.com/download"
 Write-Host ""
 $autoupdate = Read-Host -Prompt "Recommended answer is n. Which will you choose? TurnOn | enter anything "
 
-
-Write-Host "You selected"
-Write-Host "Theme : " + ${ThemeName}
-Write-Host "Install lyrics : " + ${lyrics}
-Write-Host "Install Korean : " + ${WantLangKorean}
-if ($autoupdate -eq 'TurnOn') {
-  Write-Host "AutoUpdate : On"
-} else {
-  Write-Host "AutoUpdate : Off"
-}
-
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 1
 
 # ======================================= User Input Ends ======================================= #
 # ======================================= Installing spicetify-cli starts here ======================================= #
@@ -234,6 +226,42 @@ if ($lyrics -eq 'y') {
   # Save Config
   spicetify config custom_apps genius
 }
+
+
+
+
+# If user want spicetify-cli provided extensions
+if ($autoSkipVideo -eq 'y') {
+  spicetify config extensions autoSkipVideo.js
+}
+if ($bookmark -eq 'y') {
+  spicetify config extensions bookmark.js
+}
+if ($autoSkipExplicit -eq 'y') {
+  spicetify config extensions autoSkipExplicit.js
+}
+if ($djMode -eq 'y') {
+  spicetify config extensions djMode.js
+}
+if ($fullAppDisplay -eq 'y') {
+  spicetify config extensions fullAppDisplay.js
+}
+if ($keyboardShortcut -eq 'y') {
+  spicetify config extensions keyboardShortcut.js
+}
+if ($loopyLoop -eq 'y') {
+  spicetify config extensions loopyLoop.js
+}
+if ($queueAll -eq 'y') {
+  spicetify config extensions queueAll.js
+}
+if ($shuffleplus -eq 'y') {
+  spicetify config extensions shuffle+.js
+}
+if ($trashbin -eq 'y') {
+  spicetify config extensions trashbin.js
+}
+
 
 
 
