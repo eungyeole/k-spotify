@@ -1,5 +1,5 @@
 $env:LC_ALL='C.UTF-8'
-[System.Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+[System.Console]::InputEncoding = [System.Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
 # Info users
 Write-Host "By using this script, you agree that we can delete/reset/modify theese things that is installed under ~/.spicetify"
