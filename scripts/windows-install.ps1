@@ -120,15 +120,13 @@ if($ThemeName -eq "community") {
 Write-Host ""
 Write-Host "스포티파이를 한국어로 설정하시려면 이 질문에 y라고 답해 주십시오."
 Write-Host "이 설정 질문은 스포티파이가 공식적으로 한국어를 지원하면 없어질 예정입니다."
-do { $WantLangKorean = Read-Host -Prompt 'Do you want Spotify to be Korean? y | n ' }
-until ("y","n" -ccontains $recommendedPlugins)
+do { $WantLangKorean = Read-Host -Prompt 'Do you want Spotify to be Korean? y | n ' } while ($WantLangKorean -notin @('y','n'))
 
 # Select Plugins to use
 Write-Host ""
 Write-Host ""
 Write-Host "추천 플러그인을 사용하시려면 이 질문에 y라고 답해 주십시오."
-do { $recommendedPlugins = (Read-Host -Prompt 'Do you want to install recommended plugins? [Y]es | [N]o ').ToLower() } 
-until ("y","n" -ccontains $recommendedPlugins)
+do { $recommendedPlugins = (Read-Host -Prompt 'Do you want to install recommended plugins? [Y]es | [N]o ').ToLower() } while ($recommendedPlugins -notin @('y','n'))
 
 # 추천 플러그인이 Yes일때만
 if ($recommendedPlugins -eq 'y') {
@@ -138,8 +136,7 @@ if ($recommendedPlugins -eq 'y') {
   Write-Host "https://github.com/khanhas/genius-spicetify"
   Write-Host ""
   Write-Host "genius와 musixmatch 가사 플러그인을 설치하시려면 이 질문에 y라고 답해 주십시오."
-  do { $lyrics = (Read-Host -Prompt 'Do you want to install lyrics? [Y]es | [N]o ').ToLower() } 
-  until ("y","n" -ccontains $lyrics)
+  do { $lyrics = (Read-Host -Prompt 'Do you want to install lyrics? [Y]es | [N]o ').ToLower() } while ($lyrics -notin @('y','n'))
 
   Write-Host ""
   Write-Host ""
@@ -147,8 +144,7 @@ if ($recommendedPlugins -eq 'y') {
   Write-Host "https://github.com/khanhas/spicetify-cli/wiki/Extensions#auto-skip-videos"
   Write-Host ""
   Write-Host "재생 불가능한 곡이 있을때 자동으로 다음 곡을 재생하는 플러그인을 설치하시려면 이 질문에 y라고 답해 주십시오."
-  do { $autoSkipVideo = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } 
-  until ("y","n" -ccontains $autoSkipVideo)
+  do { $autoSkipVideo = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } while ($autoSkipVideo -notin @('y','n'))
 
   Write-Host ""
   Write-Host ""
@@ -156,8 +152,7 @@ if ($recommendedPlugins -eq 'y') {
   Write-Host "https://github.com/khanhas/spicetify-cli/wiki/Extensions#bookmark"
   Write-Host ""
   Write-Host "북마크 플러그인을 설치하시려면 이 질문에 y라고 답해 주십시오."
-  do { $bookmark = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } 
-  until ("y","n" -ccontains $bookmark)
+  do { $bookmark = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } while ($bookmark -notin @('y','n'))
 
   Write-Host ""
   Write-Host ""
@@ -165,8 +160,7 @@ if ($recommendedPlugins -eq 'y') {
   Write-Host "https://github.com/khanhas/spicetify-cli/wiki/Extensions#christian-spotify"
   Write-Host ""
   Write-Host "explicit 노래를 무시하고 넘기는 플러그인을 설치하시려면 이 질문에 y라고 답해 주십시오."
-  do { $autoSkipExplicit = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } 
-  until ("y","n" -ccontains $autoSkipExplicit)
+  do { $autoSkipExplicit = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } while ($autoSkipExplicit -notin @('y','n'))
 
   Write-Host ""
   Write-Host ""
@@ -174,8 +168,7 @@ if ($recommendedPlugins -eq 'y') {
   Write-Host "https://github.com/khanhas/spicetify-cli/wiki/Extensions#dj-mode"
   Write-Host ""
   Write-Host "재생 버튼을 다음 곡 예약 기능으로 바꾸는 넘기는 플러그인을 설치하시려면 이 질문에 y라고 답해 주십시오."
-  do { $djMode = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } 
-  until ("y","n" -ccontains $djMode)
+  do { $djMode = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } while ($djMode -notin @('y','n'))
 
   Write-Host ""
   Write-Host ""
@@ -184,8 +177,7 @@ if ($recommendedPlugins -eq 'y') {
   Write-Host ""
   Write-Host "앨범 커버를 키우고 화면을 가득 채우는 이쁜 배경화면을 설정해주는 플러그인을 설치하시려면 이 질문에 y라고 답해 주십시오."
   Write-Host "설치 시 이 플러그인 실행버튼은 최상단에 위치하게 됩니다. 더블 클릭을 통해 닫을 수 있습니다."
-  do { $fullAppDisplay = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } 
-  until ("y","n" -ccontains $fullAppDisplay)
+  do { $fullAppDisplay = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } while ($fullAppDisplay -notin @('y','n'))
 
   Write-Host ""
   Write-Host ""
@@ -194,8 +186,7 @@ if ($recommendedPlugins -eq 'y') {
   Write-Host ""
   Write-Host "단축키 플러그인을 설치하시려면 이 질문에 y라고 답해 주십시오."
   Write-Host "자세한 단축키 정보는 위 링크에 쓰여 있는 설명을 참고해 주세요.(영문)"
-  do { $keyboardShortcut = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } 
-  until ("y","n" -ccontains $keyboardShortcut)
+  do { $keyboardShortcut = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } while ($keyboardShortcut -notin @('y','n'))
 
   Write-Host ""
   Write-Host ""
@@ -203,8 +194,7 @@ if ($recommendedPlugins -eq 'y') {
   Write-Host "https://github.com/khanhas/spicetify-cli/wiki/Extensions#loopy-loop"
   Write-Host ""
   Write-Host "특정 구간만 반복재생할 수 있게 하는 플러그인을 설치하시려면 이 질문에 y라고 답해 주십시오."
-  do { $loopyLoop = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } 
-  until ("y","n" -ccontains $loopyLoop)
+  do { $loopyLoop = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } while ($loopyLoop -notin @('y','n'))
 
   Write-Host ""
   Write-Host ""
@@ -212,8 +202,7 @@ if ($recommendedPlugins -eq 'y') {
   Write-Host "https://github.com/khanhas/spicetify-cli/wiki/Extensions#new-release"
   Write-Host ""
   Write-Host "원하는 아티스트의 신곡을 볼 수 있게 해주는 플러그인을 설치하시려면 이 질문에 y라고 답해 주십시오."
-  do { $newRelease = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } 
-  until ("y","n" -ccontains $newRelease)
+  do { $newRelease = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } while ($newRelease -notin @('y','n'))
 
   Write-Host ""
   Write-Host ""
@@ -221,8 +210,7 @@ if ($recommendedPlugins -eq 'y') {
   Write-Host "https://github.com/khanhas/spicetify-cli/wiki/Extensions#queue-all"
   Write-Host ""
   Write-Host "특정 페이지의 모든 곡을 예약할 수 있게 해주는 플러그인을 설치하시려면 이 질문에 y라고 답해 주십시오."
-  do { $queueAll = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } 
-  until ("y","n" -ccontains $queueAll)
+  do { $queueAll = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } while ($queueAll -notin @('y','n'))
 
   Write-Host ""
   Write-Host ""
@@ -230,8 +218,7 @@ if ($recommendedPlugins -eq 'y') {
   Write-Host "https://github.com/khanhas/spicetify-cli/wiki/Extensions#shuffle"
   Write-Host ""
   Write-Host "(예약곡 및 앨범 등)에서의 재생 순서를 섞을 수 있게 해주는 플러그인을 설치하시려면 이 질문에 y라고 답해 주십시오."
-  do { $shuffleplus = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } 
-  until ("y","n" -ccontains $shuffleplus)
+  do { $shuffleplus = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } while ($shuffleplus -notin @('y','n'))
 
   Write-Host ""
   Write-Host ""
@@ -239,8 +226,7 @@ if ($recommendedPlugins -eq 'y') {
   Write-Host "https://github.com/khanhas/spicetify-cli/wiki/Extensions#trash-bin"
   Write-Host ""
   Write-Host "특정 곡/앨범 등을 평생 다시는 안 듣게 해버릴 수 있는 플러그인을 설치하시려면 이 질문에 y라고 답해 주십시오."
-  do { $trashbin = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } 
-  until ("y","n" -ccontains $trashbin)
+  do { $trashbin = (Read-Host -Prompt 'Do you want to install this extension? [Y]es | [N]o ').ToLower() } while ($trashbin -notin @('y','n'))
 }
 
 
