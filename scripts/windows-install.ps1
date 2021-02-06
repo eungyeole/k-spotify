@@ -34,8 +34,6 @@ if($AgreeTOS -eq "y") {
   Exit
 }
 
-TOS_English
-
 # ======================================= Functions and preparing starts here ======================================= #
 
 # Set up UTF-8 (needed for Korean)
