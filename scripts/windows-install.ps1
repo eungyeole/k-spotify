@@ -4,8 +4,8 @@ $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Obj
 
 # Info users
 
-Write-Host "By using this script, you agree that we can delete/reset/modify theese things that is installed under ~/.spicetify"
-Write-Host "Installed extensions, theme folder, spicetify config file, spicetify installed folder, spicetify folder, and other spicetify related things, spotify configuration"
+Write-Host "By using this script, you agree that we can delete/reset/modify theese things that is installed under ~/.spicetify and modify spotify configuration, Powershell Configuration"
+Write-Host "Installed extensions, theme folder, spicetify config file, spicetify installed folder, spicetify folder, and other spicetify related things"
 Write-Host "If you want to disagree, just simply close this script"
 Write-Host ""
 Write-Host "You can download newer version of this script (if you need it) at https://github.com/eungyeole/k-spotify"
@@ -70,7 +70,7 @@ Write-Host "커뮤니티 테마를 사용하시려면 community 라고 입력해
 Write-Host "커뮤니티 테마 링크 : https://github.com/morpheusthewhite/spicetify-themes"
 Write-Host ""
 do { $ThemeName = Read-Host -Prompt 'Input Theme name to use! default | community | melon | flo | vibe ' } 
-until ("default","RESET","melon","flo","vibe" -ccontains $ThemeName)
+until ("default","community","RESET","melon","flo","vibe" -ccontains $ThemeName)
 
 # Reset Theme
 if($ThemeName -eq "RESET"){
